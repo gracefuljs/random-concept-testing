@@ -5,6 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<style type="text/css">
+		*{
+			box-sizing: border-box;
+		}
+
 		body{
 			margin:  0;
 			padding: 0;
@@ -12,7 +16,6 @@
 		}
 
 		#forced-landscape-canvas{
-			box-sizing: border-box;
 			display: block;
 			background-color: blue;
 			margin:0;
@@ -35,6 +38,11 @@
 				transform: rotate(90deg);
 				height:100vh;
 				width:100vw;
+			}
+
+			#forced-landscape-canvas{
+				margin: 0;
+				padding: 0;
 			}
 		}
 
@@ -65,7 +73,7 @@
 	let originalImgSize = {width:0, height:0};
 
 	let img = document.createElement("img");
-	img.src = "image/img.jpg";
+	img.src = "image/img2.jpg";
 	img.addEventListener("load", () => {
 		originalImgSize.width = img.width;
 		originalImgSize.height = img.height;
@@ -75,19 +83,19 @@
 	function draw(){
 
 		let oldWidth = originalImgSize.width; 
-		let width = (originalImgSize.width > canvas.width) ? canvas.width / 2 : originalImgSize.width;
+		let width = (originalImgSize.width > canvas.width) ? canvas.width : originalImgSize.width;
 		img.width = width;
 		img.height = originalImgSize.height * (width / oldWidth);
 
 		let x = 0;
 		let y = 0;
 		
-		context.drawImage(img, x, y);
+		context.drawImage(img, x, y, img.width, img.height);
 
 		console.log(canvas);
-		console.log(`Canvas dimensions: ${canvas.height} X ${canvas.width}`)
-		console.log(`Image dimensions: ${img.width} X ${img.height}`)
-		console.log(document.body.width)
+		console.log(`Canvas dimensions: ${canvas.width} X ${canvas.height}`);
+		console.log(`Image dimensions: ${img.width} X ${img.height}`);
+		console.log(screen)
 	};
 
 	window.addEventListener("resize", () => {

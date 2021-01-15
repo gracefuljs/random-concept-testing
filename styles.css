@@ -1,0 +1,21 @@
+body{
+	color:#fff;
+	background-color:#263d5a;
+	font-family:sans-serif;
+	letter-spacing: 2px;
+	line-height: 150%;
+	padding:5%;
+}
+
+a, a:visited{
+	color: #74a8db;
+	text-decoration: none;
+}
+
+h1{
+	font-family:serif;
+}
+
+ul{
+	list-style-type: square;
+}

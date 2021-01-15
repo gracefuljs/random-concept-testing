@@ -32,9 +32,9 @@
 			body{
 				margin:  0;
 				padding: 0;
-				transform: rotate(-90deg);
-				width:100vw;
+				transform: rotate(90deg);
 				height:100vh;
+				width:100vw;
 			}
 		}
 
@@ -62,29 +62,36 @@
 
 	//---------------------------Image Creation------------------------------//
 
+	let originalImgSize = {width:0, height:0};
+
 	let img = document.createElement("img");
 	img.src = "image/img.jpg";
 	img.addEventListener("load", () => {
-		draw()
+		originalImgSize.width = img.width;
+		originalImgSize.height = img.height;
+		draw();
 	});
 
 	function draw(){
 
-		let oldWidth = img.width; 
-		let width = (img.width > canvas.width) ? canvas.width / 2 : img.width;
+		let oldWidth = originalImgSize.width; 
+		let width = (originalImgSize.width > canvas.width) ? canvas.width / 2 : originalImgSize.width;
 		img.width = width;
-		img.height = img.height * (width / oldWidth);
+		img.height = originalImgSize.height * (width / oldWidth);
 
-		let x = ( canvas.width / 2 ) - ( img.width / 2 );
+		let x = 0;
 		let y = 0;
 		
 		context.drawImage(img, x, y);
 
-		console.log(canvas.height, canvas.width)
-		console.log(img.width)
+		console.log(canvas);
+		console.log(`Canvas dimensions: ${canvas.height} X ${canvas.width}`)
+		console.log(`Image dimensions: ${img.width} X ${img.height}`)
+		console.log(document.body.width)
 	};
 
 	window.addEventListener("resize", () => {
+		console.log("Resize!");
 		canvas.width  = window.innerWidth;
 		canvas.height = window.innerHeight;
 		draw();
